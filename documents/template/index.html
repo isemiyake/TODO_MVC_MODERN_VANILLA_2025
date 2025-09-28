@@ -1,6 +1,19 @@
-import "./style.css";
-export default function getTemplate(){
-return ` <section class="todoapp">
+<!DOCTYPE html>
+<html lang="en" data-framework="javascript-es5">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="A TodoMVC written with JavaScript es5 features."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>TodoMVC: JavaScript Es5</title>
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <section class="todoapp">
       <header class="header">
         <h1>todos</h1>
         <input
@@ -17,7 +30,20 @@ return ` <section class="todoapp">
           >
         </div>
         <ul class="todo-list">
-           
+          <li data-id="1" class="completed">
+            <div class="view">
+              <input class="toggle" type="checkbox" checked /><label
+                >task1</label
+              ><button class="destroy"></button>
+            </div>
+          </li>
+          <li data-id="2" class="editing">
+            <div class="view">
+              <input class="toggle" type="checkbox" /><label>task2</label
+              ><button class="destroy"></button>
+            </div>
+            <input class="edit" />
+          </li>
         </ul>
       </main>
       <footer class="footer">
@@ -47,5 +73,6 @@ return ` <section class="todoapp">
       </p>
       <p>Maintenanced by the TodoMVC team</p>
       <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
-    </footer>`;
-}
+    </footer>
+  </body>
+</html>
