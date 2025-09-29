@@ -4,7 +4,7 @@ import getTemplate from "./template";
 export default class TodoList {
   constructor(data) {
     this.domElt = document.querySelector(data.el);
-    this.listDomELt = null; 
+    this.listDomELt = null;
     DB.setApiURL(data.apiURL);
     this.todos = [];
     this.loadTodos();
@@ -24,10 +24,8 @@ export default class TodoList {
   render() {
     this.domElt.innerHTML = getTemplate();
     this.listDomELt = this.domElt.querySelector(".todo-list");
-    this.todos.forEach((todo) =>
-      todo.render(this.listDomELt )
-    );
-    this.renderItemLeftCount();
+    this.todos.forEach((todo) => todo.render(this.listDomELt));
+    window.TodoList.renderItemLeftCount();
     this.initEvent();
   }
   async addTodo(data) {
@@ -37,7 +35,7 @@ export default class TodoList {
 
     this.todos.push(newTodo);
 
-    newTodo.render(this.listDomELt );
+    newTodo.render(this.listDomELt);
 
     this.renderItemLeftCount();
   }
@@ -46,5 +44,14 @@ export default class TodoList {
       this.addTodo(e.target.value);
       e.target.value = "";
     });
+  }
+  async deleteOneById(id) {
+    const resp = await DB.deleteOneById(id);
+    this.todos.splice(
+      this.todos.findIndex((todo) => (todo.id == id)),
+      1
+    );
+    this.domElt.querySelector(`[data-id = '${id}']`).remove();
+    this.renderItemLeftCount();
   }
 }

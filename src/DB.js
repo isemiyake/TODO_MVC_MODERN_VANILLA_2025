@@ -1,22 +1,40 @@
-export default  class DB{
-  static setApiURL(data){
-    this.apiURL=data;
+export default class DB {
+  static setApiURL(data) {
+    this.apiURL = data;
   }
-  static async findAll(){
-    const response = await fetch(this.apiURL+"todos");
+  static async findAll() {
+    const response = await fetch(this.apiURL + "todos");
     return response.json();
   }
-  static async create(data){
-    const response = await fetch(this.apiURL+"todos",{
-      method:"POST",
-      headers :{"Content-Type":"application/json"},
+  static async create(data) {
+    const response = await fetch(this.apiURL + "todos", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        content:data,
-        completed:false,
-        createdAt: Date.now()
-      })
+        content: data,
+        completed: false,
+        createdAt: Date.now(),
+      }),
     });
     return response.json();
-
+  }
+  static async updateOne(todo) {
+    const response = await fetch(this.apiURL + "todos/" + todo.id, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content: todo.content,
+        completed: todo.completed,
+      }),
+    });
+    return response.json();
+  }
+   static async deleteOneById(id) {
+    const response = await fetch(this.apiURL + "todos/" + id, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      
+    });
+    return response.json();
   }
 }
